@@ -92,13 +92,15 @@ df_hungry_ages
 # Replace None with your code
 df_4_oldest = pd.read_sql("""
 SELECT name, age, breed
-FROM (
-    SELECT name, age, breed
-    FROM dogs
-    ORDER BY age DESC
-    LIMIT 4
+FROM dogs
+WHERE age IN (
+    SELECT DISTINCT age 
+                          FROM dogs 
+                          ORDER BY age DESC 
+                          LIMIT 4
 )
-ORDER BY breed ASC;
+ORDER BY breed ASC
+LIMIT 4;
 """, conn2)
 df_4_oldest
 
