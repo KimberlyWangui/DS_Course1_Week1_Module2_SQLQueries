@@ -93,16 +93,10 @@ df_hungry_ages
 df_4_oldest = pd.read_sql("""
 SELECT name, age, breed
 FROM dogs
-WHERE age IN (
-    SELECT DISTINCT age 
-                          FROM dogs 
-                          ORDER BY age DESC 
-                          LIMIT 4
-)
-ORDER BY breed ASC
+ORDER BY age DESC
 LIMIT 4;
 """, conn2)
-df_4_oldest
+df_4_oldest = df_4_oldest.sort_values(by='breed').reset_index(drop=True)
 
 # CodeGrade step0
 
